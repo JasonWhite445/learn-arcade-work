@@ -1,1 +1,5 @@
-hi
+print("Jason wandered into the store looking for a can of beef.")
+print("He did not know where to find a can of beef though.")
+print("Jason walked up to one of the workers and said, \"excuse me where is there a can of beef?\" ")
+print("The worker replied, \"isle 5 sir.\" ")
+print("Now knowing where to look Jason went to collect his can of beef.")
