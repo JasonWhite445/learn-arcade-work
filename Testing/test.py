@@ -21,10 +21,19 @@ main()
 
 my_value = 10
 
-def f(x):
-    x+= 10
-x = 1
-f(x)
+def a(x):
+    x = x+1
+    return x
+
+x = 10
+a(x)
+
 print(x)
 
-
+def compare_values(a, b):
+  if a < b:
+    return "less"
+  elif a > b:
+    return "greater"
+  else a == b:
+    return "equal"
