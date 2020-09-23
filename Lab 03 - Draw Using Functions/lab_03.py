@@ -21,26 +21,29 @@ def draw_halos():
 
 def draw_cloud(x, y):
     """Draw clouds anywhere"""
-    arcade.draw_ellipse_filled(200 + x, 500 + y, 200, 70, arcade.color.GRAY_BLUE)
-    arcade.draw_circle_filled(235 + x, 525 + y, 35, arcade.color.GRAY_BLUE)
-    arcade.draw_ellipse_filled(190 + x, 540 + y, 75, 130, arcade.color.GRAY_BLUE)
-    arcade.draw_circle_filled(160 + x, 525 + y, 35, arcade.color.GRAY_BLUE)
+    arcade.draw_point(x, y, arcade.color.RED, 5)
+    arcade.draw_ellipse_filled( x, 35 + y, 200, 70, arcade.color.GRAY_BLUE)
+    arcade.draw_circle_filled(35 + x, 60 + y, 35, arcade.color.GRAY_BLUE)
+    arcade.draw_ellipse_filled(-10 + x, 85 + y, 75, 130, arcade.color.GRAY_BLUE)
+    arcade.draw_circle_filled(-40 + x, 60 + y, 35, arcade.color.GRAY_BLUE)
 
 def draw_cactus(x, y):
     """Draw cactus anywhere"""
-    arcade.draw_lrtb_rectangle_filled(200 + x, 250 + x, 335 + y, 100 + y, arcade.color.BANGLADESH_GREEN)
-    arcade.draw_lrtb_rectangle_filled(125 + x, 250 + x, 250 + y, 225 + y, arcade.color.BANGLADESH_GREEN)
-    arcade.draw_lrtb_rectangle_filled(125 + x, 150 + x, 275 + y, 225 + y, arcade.color.BANGLADESH_GREEN)
-    arcade.draw_lrtb_rectangle_filled(250 + x, 310 + x, 225 + y, 200 + y, arcade.color.BANGLADESH_GREEN)
-    arcade.draw_lrtb_rectangle_filled(285 + x, 310 + x, 275 + y, 225 + y, arcade.color.BANGLADESH_GREEN)
-    arcade.draw_circle_filled(225 + x, 335 + y, 25, arcade.color.BANGLADESH_GREEN)
-    arcade.draw_circle_filled(137.5 + x, 275 + y, 12.5, arcade.color.BANGLADESH_GREEN)
-    arcade.draw_circle_filled(297.5 + x, 275 + y, 12.5, arcade.color.BANGLADESH_GREEN)
+    arcade.draw_point(x, y, arcade.color.RED, 5)
+    arcade.draw_lrtb_rectangle_filled(-25 + x, 25 + x, 235 + y, y, arcade.color.BANGLADESH_GREEN)
+    arcade.draw_lrtb_rectangle_filled(-100 + x, 25 + x, 150 + y, 125 + y, arcade.color.BANGLADESH_GREEN)
+    arcade.draw_lrtb_rectangle_filled(-100 + x, -75 + x, 175 + y, 125 + y, arcade.color.BANGLADESH_GREEN)
+    arcade.draw_lrtb_rectangle_filled(25 + x, 85 + x, 125 + y, 100 + y, arcade.color.BANGLADESH_GREEN)
+    arcade.draw_lrtb_rectangle_filled(60 + x, 85 + x, 175 + y, 125 + y, arcade.color.BANGLADESH_GREEN)
+    arcade.draw_circle_filled(x, 235 + y, 25, arcade.color.BANGLADESH_GREEN)
+    arcade.draw_circle_filled(-87.5 + x, 175 + y, 12.5, arcade.color.BANGLADESH_GREEN)
+    arcade.draw_circle_filled(72.5 + x, 175 + y, 12.5, arcade.color.BANGLADESH_GREEN)
 
 def draw_rock(x, y):
     """Draw rock anywhere"""
-    arcade.draw_lrtb_rectangle_filled(100 + x, 150 + x, 50 + y, 45 + y, arcade.color.BLACK_OLIVE)
-    arcade.draw_ellipse_filled(125 + x, 50 + y, 50, 10, arcade.color.BLACK_OLIVE)
+    arcade.draw_point(x, y, arcade.color.RED, 5)
+    arcade.draw_lrtb_rectangle_filled(-25 + x, 25 + x, 5 + y,  y, arcade.color.BLACK_OLIVE)
+    arcade.draw_ellipse_filled(x, 5 + y, 50, 10, arcade.color.BLACK_OLIVE)
 
 def draw_oasis():
     """Draw the oasis"""
@@ -58,16 +61,16 @@ def main():
     draw_halos()
     draw_shore()
     draw_oasis()
-    draw_cactus(100, 200)
-    draw_cactus(0, 0)
-    draw_cactus(300, 100)
-    draw_cloud(50, 100)
-    draw_cloud(350, 25)
-    draw_cloud(-100, -10)
-    draw_rock(0, 67)
-    draw_rock(-40, 150)
-    draw_rock(550, 300)
-    draw_rock(600, 275)
+    draw_cactus(275, 275)
+    draw_cactus(200, 10)
+    draw_cactus(500, 225)
+    draw_cloud(550, 600)
+    draw_cloud(350, 525)
+    draw_cloud(100, 550)
+    draw_rock(70, 167)
+    draw_rock(80, 250)
+    draw_rock(650, 300)
+    draw_rock(700, 275)
     draw_rock(325, 100)
 
     arcade.finish_render()
