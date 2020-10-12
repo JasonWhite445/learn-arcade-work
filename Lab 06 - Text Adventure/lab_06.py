@@ -11,27 +11,27 @@ def main():
     room_list = []
     current_room = 0
 
-    room = Room("Dining Room", 3, 1, None, None)
+    room = Room("You are in a old Dining Room. There are rooms to the north and east.", 3, 1, None, None)
     room_list.append(room)
-    room = Room("South Hallway", 4, 2, None, 0)
+    room = Room("You are in the long Southern Hallway. There are rooms to the north, east, and west.", 4, 2, None, 0)
     room_list.append(room)
-    room = Room("Bedroom", 5, None, None, 1)
+    room = Room("You are in a stain ridden Bedroom. There are rooms to the north and west.", 5, None, None, 1)
     room_list.append(room)
-    room = Room("Bathroom", None, 4, 0, None)
+    room = Room("You are in rusted, wet Bathroom. There are rooms to the south and east.", None, 4, 0, None)
     room_list.append(room)
-    room = Room("North Hallway", 6, 5, 1, 3)
+    room = Room("You are in the short Northern Hallway. There are rooms in each direction.", 6, 5, 1, 3)
     room_list.append(room)
-    room = Room("Fire pit lounge", None, None, 2, 4)
+    room = Room("You are in the hot Fire Pit Lounge. There are rooms to the south and west.", None, None, 2, 4)
     room_list.append(room)
-    room = Room("Garden", None, None, 4, None)
+    room = Room("You are outside in the aroma filled Garden. Turn back to go back in the house.", None, None, 4, None)
     room_list.append(room)
     done = True
 
     print("This is a game where you travel from room to room using North, South, East, and West.")
-    print("If at any point you would like to be finished press the q key")
+    print("If at any point you would like to be finished press the q key or type quit.")
 
     while done is True:
-        print("You are currently in the", room_list[current_room].description + ". There is a door to ")
+        print(room_list[current_room].description)
         print()
         direction = str(input("What direction would you like to go? "))
         if direction.lower() == "north" or direction.lower() == "n":
@@ -62,7 +62,7 @@ def main():
             else:
                 current_room = next_room
 
-        if direction.lower() == "q":
+        if direction.lower() == "q" or direction.lower() == "quit":
             done = False
             print("Thanks for playing!")
 
