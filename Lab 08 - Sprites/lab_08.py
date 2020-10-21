@@ -51,6 +51,9 @@ class MyGame(arcade.Window):
 
         arcade.set_background_color(arcade.color.LIGHT_GREEN)
 
+        self.butterfly_sound = arcade.load_sound("confirmation_001.ogg")
+        self.wasp_sound = arcade.load_sound("error_001.ogg")
+
     def setup(self):
 
         self.net_list = arcade.SpriteList()
@@ -109,6 +112,7 @@ class MyGame(arcade.Window):
             butterfly.reset_pos()
             butterfly.remove_from_sprite_lists()
             self.score += 1
+            arcade.play_sound(self.butterfly_sound)
 
         if len(self.butterfly_list) > 0:
 
@@ -119,6 +123,7 @@ class MyGame(arcade.Window):
                 wasp.reset_pos()
                 wasp.remove_from_sprite_lists()
                 self.score -= 1
+                arcade.play_sound(self.wasp_sound)
 
 
 def main():
