@@ -8,7 +8,7 @@ SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
 SCREEN_TITLE = "Gem Knight!"
 
-NUMBER_OF_GEMS = 25
+NUMBER_OF_GEMS = 10
 
 VIEWPORT_MARGIN = 40
 
@@ -39,6 +39,8 @@ class MyGame(arcade.Window):
         self.avatar_list = arcade.SpriteList()
         self.box_list = arcade.SpriteList()
         self.gem_list = arcade.SpriteList()
+
+        self.score = 0
 
         self.avatar_sprite = arcade.Sprite("Avatar.png", 0.1)
         self.avatar_sprite.center_x = 64
@@ -79,7 +81,7 @@ class MyGame(arcade.Window):
 
         for i in range(NUMBER_OF_GEMS):
 
-            gem = arcade.Sprite("gem.png")
+            gem = arcade.Sprite("gem.png", 0.05)
             gem_placed_successfully = False
 
             while not gem_placed_successfully:
@@ -110,7 +112,7 @@ class MyGame(arcade.Window):
         self.avatar_list.draw()
 
         output = f"Score: {self.score}"
-        arcade.draw_text(output, 10, 20, arcade.color.WHITE, 14)
+        arcade.draw_text(output, 10, 20, arcade.color.SCARLET, 14)
 
     def on_key_press(self, key, modifiers):
 
