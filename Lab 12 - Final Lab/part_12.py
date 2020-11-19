@@ -1,9 +1,16 @@
-class Item():
+"""
+Text Adventure
+"""
+
+
+class Item:
     def __init__(self, room_number, description, name):
         self.room_number = room_number
         self.description = description
         self.name = name
-class Room():
+
+
+class Room:
     def __init__(self, description, north, east, south, west, northeast, northwest, southeast, southwest):
         self.description = description
         self.north = north
@@ -15,16 +22,17 @@ class Room():
         self.southeast = southeast
         self.southwest = southwest
 
+
 def main():
 
     room_list = []
     current_room = 0
 
-    room = Room("You are in a old Dining Room. There are rooms to the north, east, and northeast.", 3, 1, None, None, 4, None, None, None)
+    room = Room("You are in a old Dining Room.\nThere are rooms to the north, east, and northeast.", 3, 1, None, None, 4, None, None, None)
     room_list.append(room)
     room = Room("You are in the long Southern Hallway. There are rooms to the north, east, west, northeast, and northwest.", 4, 2, None, 0, 5, 3, None, None)
     room_list.append(room)
-    room = Room("You are in a stain ridden Bedroom. There are rooms to the north, west, and northwest.", 5, None, None, 1, None, 4, None, None)
+    room = Room("You are in a stain ridden bedroom. There are rooms to the north, west, and northwest.", 5, None, None, 1, None, 4, None, None)
     room_list.append(room)
     room = Room("You are in rusted, wet Bathroom. There are rooms to the south, east, northeast, and southeast.", None, 4, 0, None, 6, None, 1, None)
     room_list.append(room)
@@ -37,105 +45,156 @@ def main():
     done = True
 
     item_list = []
-    current_item = 0
 
-    item = Item(0, "There is a dirty plate on the table.", 0)
+    item = Item(0, "There is a dirty plate on the table.", "plate")
     item_list.append(item)
-    item = Item(1, "There is a wax candle on the floor.", 1)
+    item = Item(1, "There is a wax candle on the floor.", "candle")
     item_list.append(item)
-    item = Item(2, "There is a muddy pillow sheet at the foot of the bed.", 2)
+    item = Item(2, "There is a muddy pillow sheet at the foot of the bed.", "sheet")
     item_list.append(item)
-    item = Item(3, "There is a piece of shattered mirror in the tub.", 3)
+    item = Item(3, "There is a piece of shattered mirror in the tub.", "mirror")
     item_list.append(item)
-    item = Item(4, "There is a dagger hanging from the wall to your left.", 4)
+    item = Item(4, "There is a dagger hanging from the wall to your left.", "dagger")
     item_list.append(item)
-    item = Item(5, "There are hot coals at he foot of the fire.", 5)
+    item = Item(5, "There are hot coals at he foot of the fire.", "coals")
     item_list.append(item)
-    item = Item(6, "A blue lily is situated in the center of the garden.", 6)
+    item = Item(6, "A blue lily is situated in the center of the garden.", "lily")
     item_list.append(item)
 
-    item_list.append(item)
 
     print("This is a game where you travel from room to room using North, South, East, West, Northeast, Northwest, Southeast, and Southwest.")
     print("If at any point you would like to be finished press the q key or type quit.")
 
     while done is True:
-        print(room_list[current_room].description, item_list[current_item].description)
+        print(room_list[current_room].description)
+        # Print all the items in the current room
+        for item in item_list:
+            if current_room == item.room_number:
+                print(item.description)
         print()
-        direction = str(input("What direction would you like to go? "))
-        if direction.lower() == "north" or direction.lower() == "n":
+        user_input = input("What would you like to do? ")
+        user_command = user_input.split(" ")
+        if user_input.lower() == "north" or user_input.lower() == "n":
             next_room = room_list[current_room].north
-            next_item = item_list[next_room].room_number
             if next_room is None:
                 print("You can't go that way!")
             else:
                 current_room = next_room
-                current_item = next_item
 
-        if direction.lower() == "east" or direction.lower() == "e":
+
+        if user_input.lower() == "east" or user_input.lower() == "e":
             next_room = room_list[current_room].east
-            next_item = item_list[next_room].room_number
             if next_room is None:
                 print("You can't go that way!")
             else:
                 current_room = next_room
-                current_item = next_item
 
-        if direction.lower() == "south" or direction.lower() == "s":
+        if user_input.lower() == "south" or user_input.lower() == "s":
             next_room = room_list[current_room].south
-            next_item = item_list[next_room].room_number
             if next_room is None:
                 print("You can't go that way!")
             else:
                 current_room = next_room
-                current_item = next_item
 
-        if direction.lower() == "west" or direction.lower() == "w":
+
+        if user_input.lower() == "west" or user_input.lower() == "w":
             next_room = room_list[current_room].west
-            next_item = item_list[next_room].room_number
             if next_room is None:
                 print("You can't go that way!")
             else:
                 current_room = next_room
-                current_item = next_item
 
-        if direction.lower() == "southwest" or direction.lower() == "sw":
+
+        if user_input.lower() == "southwest" or user_input.lower() == "sw":
             next_room = room_list[current_room].southwest
-            next_item = item_list[next_room].room_number
             if next_room is None:
                 print("You can't go that way!")
             else:
                 current_room = next_room
-                current_item = next_item
 
-        if direction.lower() == "southeast" or direction.lower() == "se":
+
+        if user_input.lower() == "southeast" or user_input.lower() == "se":
             next_room = room_list[current_room].southeast
-            next_item = item_list[next_room].room_number
             if next_room is None:
                 print("You can't go that way!")
             else:
                 current_room = next_room
-                current_item = next_item
 
-        if direction.lower() == "northwest" or direction.lower() == "nw":
+
+        if user_input.lower() == "northwest" or user_input.lower() == "nw":
             next_room = room_list[current_room].northwest
-            next_item = item_list[next_room].room_number
             if next_room is None:
                 print("You can't go that way!")
             else:
                 current_room = next_room
-                current_item = next_item
 
-        if direction.lower() == "northeast" or direction.lower() == "ne":
+
+        if user_input.lower() == "northeast" or user_input.lower() == "ne":
             next_room = room_list[current_room].northeast
-            next_item = item_list[next_room].room_number
             if next_room is None:
                 print("You can't go that way!")
             else:
                 current_room = next_room
-                current_item = next_item
 
-        if direction.lower() == "q" or direction.lower() == "quit":
+
+        if user_command[0].lower() == "get":
+            success = False
+            for item in item_list:
+                if user_command[1].lower() == item.name and current_room == item.room_number:
+                    item.room_number = -1
+                    success = True
+                    print(f"You have picked up a {item.name}.")
+            if not success:
+                print("That action cannot be performed.")
+
+        if user_command[0].lower() == "drop":
+            drop = False
+            for item in item_list:
+                if user_command[1].lower() == item.name and item.room_number == -1:
+                    item.room_number = current_room
+                    drop = True
+                    print(f"You have dropped your {item.name}.")
+            if not drop:
+                print("That action cannot be performed.")
+
+        if user_command[0].lower() == "show":
+            full = False
+            for item in item_list:
+                if user_command[1].lower() == "inventory" and item.room_number == -1:
+                    full = True
+                    print(f"you have a {item.name} in your inventory")
+            if not full:
+                print("That action cannot be performed.")
+
+        if user_command[0].lower() == "slash":
+            equipped = False
+            for item in item_list:
+                if user_command[1].lower() == "dagger" and item.room_number == -1:
+                    equipped = True
+                    print("you have slashed with your dagger!")
+            if not equipped:
+                print("That action cannot be performed.")
+
+        if user_command[0].lower() == "use":
+            usable = False
+            for item in item_list:
+                if user_command[1].lower() == item.name and item.room_number == -1:
+                    usable = True
+                    print(f"you have used your {item.name}!")
+            if not usable:
+                print("That action cannot be performed.")
+
+        if user_command[0].lower() == "smell":
+            picked = False
+            for item in item_list:
+                if user_command[1].lower() == "lily" and item.room_number == -1:
+                    picked = True
+                    print(f"you take a long whiff of your beautiful flower...")
+            if not picked:
+                print("That action cannot be performed.")
+
+
+        if user_input.lower() == "q" or user_input.lower() == "quit":
             done = False
             print("Thanks for playing!")
 
