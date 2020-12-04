@@ -1,6 +1,7 @@
 """
 Text Adventure
 """
+import random
 
 
 class Item:
@@ -28,7 +29,7 @@ def main():
     room_list = []
     current_room = 0
 
-    room = Room("You are in a old Dining Room.\nThere are rooms to the north, east, and northeast.", 3, 1, None, None, 4, None, None, None)
+    room = Room("You are in an old dining room.\nThere are rooms to the north, east, and northeast.", 3, 1, None, None, 4, None, None, None)
     room_list.append(room)
     room = Room("You are in the long Southern Hallway. There are rooms to the north, east, west, northeast, and northwest.", 4, 2, None, 0, 5, 3, None, None)
     room_list.append(room)
@@ -61,26 +62,35 @@ def main():
     item = Item(6, "A blue lily is situated in the center of the garden.", "lily")
     item_list.append(item)
 
+    health_points = 3
+    monster_health_points = 5
+    actions_performed = 0
+    dagger_uses = 7
 
     print("This is a game where you travel from room to room using North, South, East, West, Northeast, Northwest, Southeast, and Southwest.")
+    print("Try and get out of the mansion as quick as possible. Something lurks in the dark... ")
     print("If at any point you would like to be finished press the q key or type quit.")
 
     while done is True:
         print(room_list[current_room].description)
+        monster_room = random.randrange(7)
+        chance_hit = random.randrange(2)
+        actions_performed += 1
         # Print all the items in the current room
         for item in item_list:
             if current_room == item.room_number:
                 print(item.description)
         print()
+
         user_input = input("What would you like to do? ")
         user_command = user_input.split(" ")
+
         if user_input.lower() == "north" or user_input.lower() == "n":
             next_room = room_list[current_room].north
             if next_room is None:
                 print("You can't go that way!")
             else:
                 current_room = next_room
-
 
         if user_input.lower() == "east" or user_input.lower() == "e":
             next_room = room_list[current_room].east
@@ -96,14 +106,12 @@ def main():
             else:
                 current_room = next_room
 
-
         if user_input.lower() == "west" or user_input.lower() == "w":
             next_room = room_list[current_room].west
             if next_room is None:
                 print("You can't go that way!")
             else:
                 current_room = next_room
-
 
         if user_input.lower() == "southwest" or user_input.lower() == "sw":
             next_room = room_list[current_room].southwest
@@ -112,14 +120,12 @@ def main():
             else:
                 current_room = next_room
 
-
         if user_input.lower() == "southeast" or user_input.lower() == "se":
             next_room = room_list[current_room].southeast
             if next_room is None:
                 print("You can't go that way!")
             else:
                 current_room = next_room
-
 
         if user_input.lower() == "northwest" or user_input.lower() == "nw":
             next_room = room_list[current_room].northwest
@@ -128,14 +134,12 @@ def main():
             else:
                 current_room = next_room
 
-
         if user_input.lower() == "northeast" or user_input.lower() == "ne":
             next_room = room_list[current_room].northeast
             if next_room is None:
                 print("You can't go that way!")
             else:
                 current_room = next_room
-
 
         if user_command[0].lower() == "get":
             success = False
@@ -166,33 +170,51 @@ def main():
             if not full:
                 print("That action cannot be performed.")
 
-        if user_command[0].lower() == "slash":
+        if user_command[0].lower() == "use":
             equipped = False
             for item in item_list:
-                if user_command[1].lower() == "dagger" and item.room_number == -1:
+                if user_command[1].lower() == "dagger" and item.room_number == -1 and item.name == "dagger" and dagger_uses > 0:
                     equipped = True
-                    print("you have slashed with your dagger!")
+                    print("you have slashed with your dagger! Your blade dulls.")
+                    dagger_uses -= 1
             if not equipped:
-                print("That action cannot be performed.")
-
-        if user_command[0].lower() == "use":
-            usable = False
-            for item in item_list:
-                if user_command[1].lower() == item.name and item.room_number == -1:
-                    usable = True
-                    print(f"you have used your {item.name}!")
-            if not usable:
                 print("That action cannot be performed.")
 
         if user_command[0].lower() == "smell":
             picked = False
             for item in item_list:
-                if user_command[1].lower() == "lily" and item.room_number == -1:
+                if user_command[1].lower() == "lily" and item.room_number == -1 and item.name == "lily":
                     picked = True
                     print(f"you take a long whiff of your beautiful flower...")
             if not picked:
                 print("That action cannot be performed.")
 
+        if monster_room == current_room:
+            monster_input = input("Something moves toward you in the dark... What will you do?")
+            monster_command = monster_input.split(" ")
+            if monster_command[0].lower() == "slash":
+                attack = False
+                for item in item_list:
+                    if monster_command[1].lower() == "dagger" and item.room_number == -1 and item.name == "dagger":
+                        dagger_uses -= 1
+                        attack = True
+                        if chance_hit == 0:
+                            print("You have punctured the monster! It is retreating! Your dagger has dulled.")
+                            monster_health_points -= 1
+                        else:
+                            print("The monster connects with a hit... Your wound will not heal. Your dagger has also dulled.")
+                            health_points -= 1
+                if not attack:
+                    print("unequipped you are dealt a significant blow")
+                    health_points -= 1
+
+        if monster_health_points == 0:
+            print("You have slayed the beast! A feat that any human would be proud of!")
+
+        if health_points == 0:
+            done = False
+            print("You have died by the monster. Game over!")
+            print("You performed", actions_performed, "actions.")
 
         if user_input.lower() == "q" or user_input.lower() == "quit":
             done = False

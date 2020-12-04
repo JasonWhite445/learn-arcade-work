@@ -1,67 +1,45 @@
-import re
+class MnM:
+    """ This is a class that represents an M&M. Don't modify it. """
 
-def split_line(line):
-
-    return re.findall('[A-Za-z]+(?:\'[A-Za-z]+)?', line)
-
-def main():
-
-    my_file = open("dictionary.txt")
-    dictionary_list = []
-    line_number = 0
-
-    for line in my_file:
-        line = line.strip()
-        dictionary_list.append(line)
-
-    my_file.close()
+    def __init__(self, color):
+        """ Create an M&M with the specified color. """
+        self.color = color
+        self.flavor = "Chocolate"
 
 
-    
-    print("There were", len(dictionary_list), "names in the file.")
-
-    print(" --- Linear Search --- ")
-
-    my_story = open("AliceInWonderLand200.txt")
-
-    for line in my_story:
-        word_list = split_line(line)
-        line_number += 1
-        for word in word_list:
-            i = 0
-            while i < len(dictionary_list) and dictionary_list[i] != word.upper():
-                i+=1
-            if i == len(dictionary_list):
-                print("Line", line_number, " possible misspelled word:", word)
-
-    my_story.close()
-
-    print(" --- Binary Search --- ")
+def sort_out_green_candy(candy_list):
+    # Write your code below this comment
+    key = "Green"
+    green_list = []
+    for item in candy_list:
+        if item.color == key:
+            green_list.append(item)
+    return green_list
+    # Write your code above this comment
 
 
-    line_number = 0
-
-    binary_story = open("AliceInWonderLand200.txt")
-
-    for line in binary_story:
-        word_list = split_line(line)
-        line_number += 1
-        for word in word_list:
-            lower_bound = 0
-            upper_bound = len(dictionary_list) - 1
-            found = False
-            while lower_bound < upper_bound and not found:
-                middle_pos = (lower_bound + upper_bound) // 2
-                if dictionary_list[middle_pos] < word.upper():
-                    lower_bound = middle_pos + 1
-                elif dictionary_list[middle_pos] > word.upper():
-                    upper_bound = middle_pos
-                else:
-                    found = True
-            if not found:
-                print("Line", line_number, " possible misspelled word:", word)
+# These are some test cases
+def test_1():
+    candy_list = []
+    candy_list.append(MnM("Green"))
+    candy_list.append(MnM("Red"))
+    candy_list.append(MnM("Blue"))
+    candy_list.append(MnM("Brown"))
+    candy_list.append(MnM("Green"))
+    result = sort_out_green_candy(candy_list)
+    print("Test 1, should be 2: ", len(result))
 
 
-    binary_story.close()
+def test_2():
+    candy_list = []
+    candy_list.append(MnM("Green"))
+    candy_list.append(MnM("Green"))
+    candy_list.append(MnM("Brown"))
+    candy_list.append(MnM("Green"))
+    candy_list.append(MnM("Green"))
+    result = sort_out_green_candy(candy_list)
+    print("Test 2, should be 4: ", len(result))
 
-main()
+
+test_1()
+test_2()
