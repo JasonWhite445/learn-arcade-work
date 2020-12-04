@@ -29,19 +29,24 @@ def main():
     room_list = []
     current_room = 0
 
-    room = Room("You are in an old dining room.\nThere are rooms to the north, east, and northeast.", 3, 1, None, None, 4, None, None, None)
+    room = Room("You are in an old dining room.\nThere are rooms to the north, east, and northeast.",
+                3, 1, None, None, 4, None, None, None)
     room_list.append(room)
-    room = Room("You are in the long Southern Hallway. There are rooms to the north, east, west, northeast, and northwest.", 4, 2, None, 0, 5, 3, None, None)
+    room = Room("You are in the long southern hallway. "
+                "There are rooms to the north, east, west, northeast, and northwest.", 4, 2, None, 0, 5, 3, None, None)
     room_list.append(room)
     room = Room("You are in a stain ridden bedroom. There are rooms to the north, west, and northwest.", 5, None, None, 1, None, 4, None, None)
     room_list.append(room)
-    room = Room("You are in rusted, wet Bathroom. There are rooms to the south, east, northeast, and southeast.", None, 4, 0, None, 6, None, 1, None)
+    room = Room("You are in rusted, wet bathroom. There are rooms to the south, east, northeast, and southeast.", None, 4, 0, None, 6, None, 1, None)
     room_list.append(room)
-    room = Room("You are in the short Northern Hallway. There are rooms to the north, east, south, west, southeast, and southwest.", 6, 5, 1, 3, None, None, 2, 0)
+    room = Room("You are in the short northern hallway. "
+                "There are rooms to the north, east, south, west, southeast, and southwest.", 6, 5, 1, 3, None, None, 2, 0)
     room_list.append(room)
-    room = Room("You are in the hot Fire Pit Lounge. There are rooms to the south, west, northwest, and southwest.", None, None, 2, 4, None, 6, None, 1)
+    room = Room("You are in the hot fire pit lounge. "
+                "There are rooms to the south, west, northwest, and southwest.", None, None, 2, 4, None, 6, None, 1)
     room_list.append(room)
-    room = Room("You are outside in the aroma filled Garden. There are rooms to the south, southeast, and southwest.", None, None, 4, None, None, None, 5, 3)
+    room = Room("You are outside in the aroma filled garden. "
+                "There are rooms to the south, southeast, and southwest.", None, None, 4, None, None, None, 5, 3)
     room_list.append(room)
     done = True
 
@@ -67,8 +72,9 @@ def main():
     actions_performed = 0
     dagger_uses = 7
 
-    print("This is a game where you travel from room to room using North, South, East, West, Northeast, Northwest, Southeast, and Southwest.")
-    print("Try and get out of the mansion as quick as possible. Something lurks in the dark... ")
+    print("This is a game where you travel from room to room "
+          "using North, South, East, West, Northeast, Northwest, Southeast, and Southwest.")
+    print("Try and slay what follows you. Something lurks in the dark... ")
     print("If at any point you would like to be finished press the q key or type quit.")
 
     while done is True:
@@ -82,9 +88,11 @@ def main():
                 print(item.description)
         print()
 
+        # ask user for input
         user_input = input("What would you like to do? ")
         user_command = user_input.split(" ")
 
+        # go a certain direction
         if user_input.lower() == "north" or user_input.lower() == "n":
             next_room = room_list[current_room].north
             if next_room is None:
@@ -141,6 +149,7 @@ def main():
             else:
                 current_room = next_room
 
+        # grab, drop, or use items
         if user_command[0].lower() == "get":
             success = False
             for item in item_list:
@@ -166,7 +175,7 @@ def main():
             for item in item_list:
                 if user_command[1].lower() == "inventory" and item.room_number == -1:
                     full = True
-                    print(f"you have a {item.name} in your inventory")
+                    print(f"You have a {item.name} in your inventory.")
             if not full:
                 print("That action cannot be performed.")
 
@@ -175,7 +184,7 @@ def main():
             for item in item_list:
                 if user_command[1].lower() == "dagger" and item.room_number == -1 and item.name == "dagger" and dagger_uses > 0:
                     equipped = True
-                    print("you have slashed with your dagger! Your blade dulls.")
+                    print("You have slashed with your dagger! Your blade dulls.")
                     dagger_uses -= 1
             if not equipped:
                 print("That action cannot be performed.")
@@ -185,12 +194,12 @@ def main():
             for item in item_list:
                 if user_command[1].lower() == "lily" and item.room_number == -1 and item.name == "lily":
                     picked = True
-                    print(f"you take a long whiff of your beautiful flower...")
+                    print(f"You take a long whiff of your beautiful flower...")
             if not picked:
                 print("That action cannot be performed.")
 
         if monster_room == current_room:
-            monster_input = input("Something moves toward you in the dark... What will you do?")
+            monster_input = input("Something moves toward you in the dark... What will you do? ")
             monster_command = monster_input.split(" ")
             if monster_command[0].lower() == "slash":
                 attack = False
@@ -202,14 +211,17 @@ def main():
                             print("You have punctured the monster! It is retreating! Your dagger has dulled.")
                             monster_health_points -= 1
                         else:
-                            print("The monster connects with a hit... Your wound will not heal. Your dagger has also dulled.")
+                            print("The monster connects with a hit... Your wound will not heal. "
+                                  "Your dagger has also dulled.")
                             health_points -= 1
                 if not attack:
-                    print("unequipped you are dealt a significant blow")
+                    print("Unequipped, you are dealt a significant blow.")
                     health_points -= 1
 
         if monster_health_points == 0:
+            done = False
             print("You have slayed the beast! A feat that any human would be proud of!")
+            print("You performed", actions_performed, "actions.")
 
         if health_points == 0:
             done = False
@@ -219,5 +231,6 @@ def main():
         if user_input.lower() == "q" or user_input.lower() == "quit":
             done = False
             print("Thanks for playing!")
+
 
 main()
